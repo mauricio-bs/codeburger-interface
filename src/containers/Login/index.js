@@ -7,6 +7,7 @@ import * as Yup from 'yup'
 import LoginImg from '../../assets/login-image.svg'
 import Logo from '../../assets/logo.svg'
 import Button from '../../components/Button'
+import { useUser } from '../../hooks/UserContext'
 import api from '../../services/api'
 import {
   Container,
@@ -28,6 +29,8 @@ const schema = Yup.object().shape({
 })
 
 function Login() {
+  const { putUserData } = useUser()
+
   const {
     register,
     handleSubmit,
@@ -35,7 +38,7 @@ function Login() {
   } = useForm({ resolver: yupResolver(schema) })
 
   const onSubmit = async clientData => {
-    const response = await toast.promise(
+    const { data } = await toast.promise(
       api.post('sessions', {
         email: clientData.email,
         password: clientData.password
@@ -47,7 +50,7 @@ function Login() {
       }
     )
 
-    console.log(response)
+    putUserData(data)
   }
 
   return (
