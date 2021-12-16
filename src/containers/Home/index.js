@@ -1,6 +1,14 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom' // substituiu o useHistory, e não necessita do .push
 
-export default function home() {
-  return <div>Home</div>
+import HomeLogo from '../../assets/home-logo.svg'
+import CategoryCarousel from '../../components/CategoryCarousel'
+import { Container, HomeImg } from './styles'
+
+export default function Home() {
+  return (
+    <Container>
+      <HomeImg src={HomeLogo} alt="logo da home" />
+      <CategoryCarousel />
+    </Container>
+  )
 }
