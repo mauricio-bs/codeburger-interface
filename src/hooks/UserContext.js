@@ -20,6 +20,7 @@ export const UserProvider = ({ children }) => {
         setUserData(JSON.parse(clientInfo))
       }
     }
+    loadUserData()
   }, [])
 
   return (
