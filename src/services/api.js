@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-const apiodeBurger = axios.create({
+const apicodeBurger = axios.create({
   baseURL: 'http://localhost:3001/',
   validateStatus: () => true
 })
 
-apiodeBurger.interceptors.request.use(async config => {
+apicodeBurger.interceptors.request.use(async config => {
   const userData = await localStorage.getItem('codeburger:userData')
   const token = userData && JSON.parse(userData).token
 
@@ -13,4 +13,4 @@ apiodeBurger.interceptors.request.use(async config => {
   return config
 })
 
-export default apiodeBurger
+export default apicodeBurger
