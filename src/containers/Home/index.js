@@ -9,8 +9,8 @@ export function Home() {
     <Container>
       <Header />
       <HomeImg src={HomeLogo} alt="logo da home" />
-      <OffersCarousel />
       <CategoryCarousel />
+      <OffersCarousel />
     </Container>
   )
 }
