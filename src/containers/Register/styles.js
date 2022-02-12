@@ -70,7 +70,7 @@ export const Input = styled.input`
 export const Button = styled.button`
   width: 182.81px;
   height: 36.13px;
-  margin-top: 75px;
+  margin-top: 45px;
   margin-bottom: 25px;
 
   background: #9758a6;
