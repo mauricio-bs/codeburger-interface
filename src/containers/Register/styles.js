@@ -6,7 +6,7 @@ export const Container = styled.div`
   height: 100vh;
   width: 100vw;
 
-  background: url$('${Background}');
+  background: url(${Background});
 
   display: flex;
   justify-content: center;
@@ -14,11 +14,11 @@ export const Container = styled.div`
 `
 
 export const RegisterImage = styled.img`
-  height: 70%;
+  height: 80%;
 `
 
 export const ContainerItens = styled.div`
-  height: 70%;
+  height: 80%;
   padding: 25px 75px;
 
   background: #373737;
