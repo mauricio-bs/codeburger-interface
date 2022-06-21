@@ -1,4 +1,4 @@
-import { KeyboardArrowDownIcon, KeyboardArrowUpIcon } from '@mui/icons-material'
+import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material'
 import {
   Box,
   Collapse,
@@ -25,7 +25,7 @@ export default function Row({ row }) {
             size="small"
             onClick={() => setOpen(!open)}
           >
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
