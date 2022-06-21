@@ -12,11 +12,28 @@ import {
 } from '@mui/material'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 
-import { ProductsImg } from './styles'
+import api from '../../../services/api'
+import status from './orderStatus'
+import { ProductsImg, ReactSeletStyle } from './styles'
 
 export default function Row({ row }) {
   const [open, setOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  async function setNewStatus(id, status) {
+    setLoading(true)
+    try {
+      await api.put(`orders/${id}`, { status })
+    } catch (err) {
+      toast.error(
+        'Ocorreu um erro ao atualizar o status do pedido, tente novamente'
+      )
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <React.Fragment>
@@ -35,7 +52,20 @@ export default function Row({ row }) {
         </TableCell>
         <TableCell>{row.name}</TableCell>
         <TableCell>{row.date}</TableCell>
-        <TableCell>{row.status}</TableCell>
+        <TableCell>
+          <ReactSeletStyle
+            options={status}
+            menuPortalTarget={document.body}
+            placeholder="status"
+            defaultValue={
+              status.find(option => option.value(row.status)) || null
+            }
+            onChange={newStatus => {
+              setNewStatus(row.orderId, newStatus.value)
+            }}
+            isLoading={loading}
+          />
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
