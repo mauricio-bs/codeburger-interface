@@ -13,6 +13,8 @@ import {
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
+import { ProductsImg } from './styles'
+
 export default function Row({ row }) {
   const [open, setOpen] = useState(false)
 
@@ -59,7 +61,10 @@ export default function Row({ row }) {
                       <TableCell>{productRow.name}</TableCell>
                       <TableCell>{productRow.category}</TableCell>
                       <TableCell>
-                        <img src={productRow.url} alt="imagem-do-produto" />
+                        <ProductsImg
+                          src={productRow.url}
+                          alt="imagem-do-produto"
+                        />
                       </TableCell>
                     </TableRow>
                   ))}
