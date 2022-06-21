@@ -41,11 +41,15 @@ export function Register() {
 
   const onSubmit = async clientData => {
     try {
-      const { status } = await api.post('users', {
-        name: clientData.name,
-        email: clientData.email,
-        password: clientData.password
-      })
+      const { status } = await api.post(
+        'users',
+        {
+          name: clientData.name,
+          email: clientData.email,
+          password: clientData.password
+        },
+        { validateStatus: () => true }
+      )
 
       if (status === 201 || status === 200) {
         toast.success('Cadastro criado com sucesso')
@@ -98,11 +102,14 @@ export function Register() {
             error={errors.confirmPassword?.message}
           />
           <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
-        </form>
 
-        <Button type="submit" style={{ marginTop: 75, marginBottom: 25 }}>
-          Sign Up
-        </Button>
+          <Button
+            type="submit"
+            style={{ marginTop: '15%', marginBottom: '6%' }}
+          >
+            Sign Up
+          </Button>
+        </form>
 
         <SignInLink>
           Já possui conta?{' '}

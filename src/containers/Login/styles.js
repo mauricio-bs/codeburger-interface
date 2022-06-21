@@ -19,7 +19,7 @@ export const LoginImage = styled.img`
 
 export const ContainerItens = styled.div`
   height: 80%;
-  padding: 25px 75px;
+  padding: 5% 7%;
 
   background: #373737;
   border-radius: 0 10px 0 0;
@@ -43,6 +43,10 @@ export const ContainerItens = styled.div`
     display: flex;
     flex-direction: column;
   }
+
+  img {
+    height: 30%;
+  }
 `
 
 export const Label = styled.p`
@@ -51,7 +55,7 @@ export const Label = styled.p`
   font-size: 12px;
   line-height: 14px;
   color: #ffffff;
-  margin-top: 28px;
+  margin-top: 2vh;
   margin-bottom: 5px;
 `
 

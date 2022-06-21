@@ -86,11 +86,14 @@ export function Login() {
             error={errors.email?.message}
           />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
-        </form>
 
-        <Button type="submit" style={{ marginTop: 75, marginBottom: 25 }}>
-          Sign In
-        </Button>
+          <Button
+            type="submit"
+            style={{ marginTop: '20%', marginBottom: '6%' }}
+          >
+            Sign In
+          </Button>
+        </form>
 
         <SignInLink>
           Não possui conta?{' '}
