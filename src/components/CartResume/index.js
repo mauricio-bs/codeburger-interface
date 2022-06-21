@@ -27,6 +27,10 @@ export function CartResume() {
       quantity: product.quantity
     }))
 
+    if (!order.length) {
+      return toast.warning('Adicione ao menos 1 produto para realizar o pedido')
+    }
+
     await toast.promise(api.post('orders', { products: order }), {
       pending: 'Realizando o seu pedido',
       success: 'Pedido realizado',
