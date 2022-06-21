@@ -10,6 +10,7 @@ import {
 import React, { useState, useEffect } from 'react'
 
 import api from '../../../services/api'
+import formatDate from '../../../utils/formatDate'
 import Row from './row'
 import { Container } from './styles'
 
@@ -31,7 +32,7 @@ export default function Orders() {
     return {
       name: order.user.name,
       orderId: order._id,
-      date: order.createdAt,
+      date: formatDate(order.createdAt),
       status: order.status,
       products: order.products
     }
