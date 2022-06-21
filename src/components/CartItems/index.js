@@ -12,7 +12,7 @@ export function CartItems() {
         <p></p>
         <p>Itens</p>
         <p>Preço</p>
-        <p style={{ paddingRight: '30px' }}>Quantidade</p>
+        <p style={{ paddingRight: 30 }}>Quantidade</p>
         <p>Total</p>
       </Header>
 

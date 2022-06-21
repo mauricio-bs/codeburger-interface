@@ -4,7 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 const CartContext = createContext({})
 
 export const CartProvider = ({ children }) => {
-  const [cartProducts, setCartProducts] = useState({})
+  const [cartProducts, setCartProducts] = useState([])
 
   const updateLocalstorage = async products => {
     await localStorage.setItem('codeburger:cartInfo', JSON.stringify(products))
@@ -70,9 +70,7 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     const loadProductData = async () => {
-      const clientCartData = await localStorage.getItem(
-        'codeburger:cartProducts'
-      )
+      const clientCartData = await localStorage.getItem('codeburger:cartInfo')
 
       if (clientCartData) {
         setCartProducts(JSON.parse(clientCartData))

@@ -16,7 +16,7 @@ export function CartResume() {
   useEffect(() => {
     const cartTotalValue = cartProducts.reduce((acc, current) => {
       return current.price * current.quantity
-    })
+    }, 0)
 
     setFinalPrice(cartTotalValue)
   }, [cartProducts])
