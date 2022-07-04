@@ -16,9 +16,9 @@ import { toast } from 'react-toastify'
 
 import api from '../../../services/api'
 import status from './orderStatus'
-import { ProductsImg, ReactSeletStyle } from './styles'
+import { ProductsImg, ReactSelectStyle } from './styles'
 
-export default function Row({ row }) {
+export default function Row({ row, setOrders, orders }) {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -26,6 +26,12 @@ export default function Row({ row }) {
     setLoading(true)
     try {
       await api.put(`orders/${id}`, { status })
+
+      const newOrders = orders.map(order =>
+        order._id === id ? { ...order, status } : order
+      )
+
+      setOrders(newOrders)
     } catch (err) {
       toast.error(
         'Ocorreu um erro ao atualizar o status do pedido, tente novamente'
@@ -53,12 +59,12 @@ export default function Row({ row }) {
         <TableCell>{row.name}</TableCell>
         <TableCell>{row.date}</TableCell>
         <TableCell>
-          <ReactSeletStyle
-            options={status}
+          <ReactSelectStyle
+            options={status.filter(sts => sts.value !== 'Todos')}
             menuPortalTarget={document.body}
             placeholder="status"
             defaultValue={
-              status.find(option => option.value(row.status)) || null
+              status.find(option => option.value === row.status) || null
             }
             onChange={newStatus => {
               setNewStatus(row.orderId, newStatus.value)
@@ -109,6 +115,8 @@ export default function Row({ row }) {
 }
 
 Row.propTypes = {
+  orders: PropTypes.array,
+  setOrders: PropTypes.func,
   row: PropTypes.shape({
     name: PropTypes.string.isRequired,
     orderId: PropTypes.string.isRequired,
