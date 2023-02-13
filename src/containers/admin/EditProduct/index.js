@@ -9,32 +9,31 @@ import * as yup from 'yup'
 
 import { ErrorMessage } from '../../../components'
 import api from '../../../services/api'
-import { Container, Input, Label, StyledButton, LabelUpload } from './styles'
+import {
+  Container,
+  Input,
+  Label,
+  StyledButton,
+  LabelUpload,
+  ContainerInput
+} from './styles'
 
-export default function NewProduct() {
+export default function EditProduct() {
   const [fileName, setFilename] = useState(null)
   const [categories, setCategories] = useState([])
 
-  const { push } = useHistory()
+  const {
+    push,
+    location: {
+      state: { product }
+    }
+  } = useHistory()
 
   const schema = yup.object().shape({
     name: yup.string().required('Digite o nome do produto'),
     price: yup.string().required('Digite o preço do produto'),
     category: yup.object().required('Escolha uma categoria'),
-    file: yup
-      .mixed()
-      .test('required', 'Carregue um arquivo', value => value?.length > 0)
-      .test(
-        'filesize',
-        'Arquivo possui mais de 2mb',
-        value => value[0]?.size <= 2048
-      )
-      .test(
-        'type',
-        'Carregue apenas arquivos JPEG/PNG',
-        value =>
-          value[0]?.type === 'image/jpeg' || value[0]?.type === 'image/png'
-      )
+    offer: yup.bool()
   })
 
   const {
@@ -45,6 +44,7 @@ export default function NewProduct() {
   } = useForm({
     resolver: yupResolver(schema)
   })
+
   async function onSubmit(data) {
     const producFormData = new FormData()
 
@@ -52,11 +52,12 @@ export default function NewProduct() {
     producFormData.append('price', data.price)
     producFormData.append('category_id', data.category.id)
     producFormData.append('file', data.file[0])
+    producFormData.append('offer', data.offer)
 
-    await toast.promise(api.post('products', producFormData), {
-      pending: 'Criando novo produto...',
-      success: 'Produto criado com scuesso',
-      error: 'Falha ao criar o produto'
+    await toast.promise(api.put(`products/${product.id}`, producFormData), {
+      pending: 'Atualizando produto...',
+      success: 'Produto atualizado com scuesso',
+      error: 'Falha ao atualizar o produto'
     })
 
     setTimeout(() => {
@@ -79,13 +80,21 @@ export default function NewProduct() {
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <div>
           <Label>Nome</Label>
-          <Input type="text" {...register('name')} />
+          <Input
+            type="text"
+            {...register('name')}
+            defaultValue={product.name}
+          />
           <ErrorMessage>{errors.name?.message}</ErrorMessage>
         </div>
 
         <div>
           <Label>Preço</Label>
-          <Input type="number" {...register('price')} />
+          <Input
+            type="number"
+            {...register('price')}
+            defaultValue={product.price}
+          />
           <ErrorMessage>{errors.price?.message}</ErrorMessage>
         </div>
 
@@ -111,6 +120,7 @@ export default function NewProduct() {
           <Controller
             name="category"
             control={control}
+            defaultValue={product.category}
             render={({ field }) => {
               return (
                 <ReactSelect
@@ -119,6 +129,7 @@ export default function NewProduct() {
                   getOptionLabel={cat => cat.name}
                   getOptionValue={cat => cat.id}
                   placeholder="Categorias..."
+                  defaultValue={product.category}
                 />
               )
             }}
@@ -126,8 +137,19 @@ export default function NewProduct() {
           <ErrorMessage>{errors.category?.message}</ErrorMessage>
         </div>
 
-        <StyledButton>Adicionar produto</StyledButton>
+        <ContainerInput>
+          <input
+            type="checkbox"
+            defaultChecked={product.offer}
+            {...register('offer')}
+          />
+          <Label>Produto em oferta?</Label>
+        </ContainerInput>
+
+        <StyledButton>Atualizar produto</StyledButton>
       </form>
     </Container>
   )
 }
+
+EditProduct.propTypes = {}
