@@ -19,20 +19,20 @@ import {
   ErrorMessage
 } from './styles'
 
-const schema = Yup.object().shape({
-  name: Yup.string('O seu nome é obrigatório').required(),
-  email: Yup.string()
-    .email('Digite um email valido')
-    .required('O email é obrigatório'),
-  password: Yup.string()
-    .required('A senha é obrigatória')
-    .min(6, 'A senha deve conter pelo menos 6 digitos'),
-  confirmPassword: Yup.string()
-    .required('A senha é obrigatória')
-    .oneOf([Yup.ref('password')], 'As senhas não coincidem')
-})
-
 export function Register() {
+  const schema = Yup.object().shape({
+    name: Yup.string().required('O seu nome é obrigatório'),
+    email: Yup.string()
+      .email('Digite um email valido')
+      .required('O email é obrigatório'),
+    password: Yup.string()
+      .required('A senha é obrigatória')
+      .min(6, 'A senha deve conter pelo menos 6 digitos'),
+    confirmPassword: Yup.string()
+      .required('A senha é obrigatória')
+      .oneOf([Yup.ref('password')], 'As senhas não coincidem')
+  })
+
   const {
     register,
     handleSubmit,

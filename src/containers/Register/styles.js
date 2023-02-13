@@ -14,15 +14,15 @@ export const Container = styled.div`
 `
 
 export const RegisterImage = styled.img`
-  height: 80%;
+  height: 70%;
 `
 
 export const ContainerItens = styled.div`
-  height: 80%;
-  padding: 25px 75px;
-
   background: #373737;
   border-radius: 0 10px 0 0;
+
+  height: 70%;
+  padding: 25px 75px;
 
   display: flex;
   flex-direction: column;
@@ -59,12 +59,12 @@ export const Input = styled.input`
   width: 391.42px;
   height: 38.32px;
 
-  padding-left: 10px;
-
   background: #ffffff;
   box-shadow: 3px 3px 10px rgba(74, 144, 266, 0.19);
+
   border-radius: 5px;
   border: ${props => (props.error ? '2px solid #cc1717' : 'none')};
+  padding-left: 10px;
 `
 
 export const Button = styled.button`

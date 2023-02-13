@@ -6,6 +6,13 @@ export const ContainerButton = styled.button`
 
   background: #9758a6;
   border-radius: 20px;
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+
   border: none;
   cursor: pointer;
   color: #eeeeee;

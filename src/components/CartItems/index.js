@@ -21,7 +21,7 @@ export function CartItems() {
           <Body key={product.id}>
             <img src={product.url} />
             <p>{product.name}</p>
-            <p>{product.formatedPrice}</p>
+            <p>{formatCurrency(product.price)}</p>
             <div className="quantity-container">
               <button onClick={() => decreaseProducts(product.id)}>-</button>
               <p>{product.quantity}</p>
